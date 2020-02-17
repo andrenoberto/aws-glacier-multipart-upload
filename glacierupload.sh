@@ -35,7 +35,7 @@ i=0
 for f in $files 
   do
      byteStart=$((i*byteSize))
-     if [ $i == $fileCount ]
+     if [ $i == $fileCount - 1 ]
      then
        byteEnd=$((i*byteSize+lastPartByteSize-1)) 
      else
