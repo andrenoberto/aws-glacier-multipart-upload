@@ -52,8 +52,8 @@ for file in $files
 #   --load 100% option only gives new jobs out if the core is than 100% active
 #   -a commands.txt runs every line of that file in parallel, in potentially random order
 #   --notice supresses citation output to the console
-#   --bar provides a command line progress bar
-parallel --load 100% -a commands.txt --no-notice --bar
+#   --progress provides a command line progress bar
+parallel --load 100% -a commands.txt --progress
 
 echo "List Active Multipart Uploads:"
 echo "Verify that a connection is open:"
