@@ -10,13 +10,14 @@ lastPartByteSize=$2
 vaultName=$3
 accountId=$4
 archiveDescription=$5
+filePrefix=$6
 
 # count the number of files that begin with "part"
-fileCount=$(ls -1 | grep "^part" | wc -l)
+fileCount=$(ls -1 | grep "^$filePrefix" | wc -l)
 echo "Total parts to upload: " $fileCount
 
 # get the list of part files to upload.  Edit this if you chose a different prefix in the split command
-files=$(ls | grep "^part")
+files=$(ls | grep "^$filePrefix")
 
 # initiate multipart upload connection to glacier
 init=$(aws glacier initiate-multipart-upload --account-id $accountId --part-size $byteSize --vault-name $vaultName --archive-description $archiveDescription)
