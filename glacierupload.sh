@@ -34,7 +34,12 @@ i=0
 for f in $files 
   do
      byteStart=$((i*byteSize))
-     byteEnd=$((i*byteSize+byteSize-1))
+     if [ $i == $fileCount ]
+     then
+       byteEnd=$lastPartByteSize
+     else
+       byteEnd=$((i*byteSize+byteSize-1))
+     fi
      echo aws glacier upload-multipart-part --body $f --range "'"'bytes '"$byteStart"'-'"$byteEnd"'/*'"'" --account-id $accountId --vault-name $vaultName --upload-id $uploadId >> commands.txt
      i=$(($i+1))
      
