@@ -60,9 +60,9 @@ Download the treehash script:
 
     wget https://raw.githubusercontent.com/andrenoberto/glaciertools/master/treehash
 
-Make it executable:
+Make them executable:
 
-    chmod u+x glacierupload.sh
+    chmod u+x glacierupload.sh treehash
 
 **Script Usage**
 
