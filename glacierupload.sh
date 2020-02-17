@@ -6,11 +6,10 @@
 # sudo pip install awscli
 
 byteSize=$1
-lastPartByteSize=$2
-vaultName=$3
-accountId=$4
-archiveDescription=$5
-filePrefix=$6
+vaultName=$2
+accountId=$3
+archiveDescription=$4
+filePrefix=$5
 
 # count the number of files that begin with "part"
 fileCount=$(ls -1 | grep "^$filePrefix" | wc -l)
@@ -38,6 +37,7 @@ for f in $files
      currentFile=$((i+1))
      if [ $currentFile == $fileCount ]
      then
+       lastPartByteSize=$(wc -c < "$file")
        byteEnd=$((i*byteSize+lastPartByteSize-1)) 
      else
        byteEnd=$((i*byteSize+byteSize-1))
