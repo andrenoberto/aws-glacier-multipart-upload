@@ -31,7 +31,7 @@ touch commands.txt
 
 # create upload commands to be run in parallel and store in commands.txt
 i=0
-for f in $files 
+for file in $files 
   do
      byteStart=$((i*byteSize))
      currentFile=$((i+1))
@@ -42,7 +42,7 @@ for f in $files
      else
        byteEnd=$((i*byteSize+byteSize-1))
      fi
-     echo aws glacier upload-multipart-part --body $f --range "'"'bytes '"$byteStart"'-'"$byteEnd"'/*'"'" --account-id $accountId --vault-name $vaultName --upload-id $uploadId >> commands.txt
+     echo aws glacier upload-multipart-part --body $file --range "'"'bytes '"$byteStart"'-'"$byteEnd"'/*'"'" --account-id $accountId --vault-name $vaultName --upload-id $uploadId >> commands.txt
      i=$(($i+1))
      
   done
