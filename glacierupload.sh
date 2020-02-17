@@ -59,7 +59,7 @@ echo "Verify that a connection is open:"
 aws glacier list-multipart-uploads --account-id $accountId --vault-name $vaultName
 
 # end the multipart upload
-aws glacier abort-multipart-upload --account-id $accountId --vault-name $vaultName --upload-id $uploadId
+aws glacier complete-multipart-upload --account-id $accountId --vault-name $vaultName --upload-id $uploadId
 
 # list open multipart connections
 echo "------------------------------"
