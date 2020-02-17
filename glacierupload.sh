@@ -64,7 +64,7 @@ fileTreeHash=$(./treehash $originalFile)
 
 # end the multipart upload
 archiveSize=$(wc -c < "$originalFile")
-aws glacier complete-multipart-upload --account-id $accountId --vault-name $vaultName --upload-id $uploadId --checksum $fileTreeHash --archiveSize $archiveSize
+aws glacier complete-multipart-upload --account-id $accountId --vault-name $vaultName --upload-id $uploadId --checksum $fileTreeHash --archive-size $archiveSize
 
 # list open multipart connections
 echo "------------------------------"
