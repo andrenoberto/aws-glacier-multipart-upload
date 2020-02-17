@@ -10,6 +10,7 @@ vaultName=$2
 accountId=$3
 archiveDescription=$4
 filePrefix=$5
+originalFile=$6
 
 # count the number of files that begin with "part"
 fileCount=$(ls -1 | grep "^$filePrefix" | wc -l)
@@ -58,8 +59,12 @@ echo "List Active Multipart Uploads:"
 echo "Verify that a connection is open:"
 aws glacier list-multipart-uploads --account-id $accountId --vault-name $vaultName
 
+# calculate file tree hash
+fileTreeHash=$(./treehash $originalFile)
+
 # end the multipart upload
-aws glacier complete-multipart-upload --account-id $accountId --vault-name $vaultName --upload-id $uploadId
+archiveSize=$(wc -c < "$originalFile")
+aws glacier complete-multipart-upload --account-id $accountId --vault-name $vaultName --upload-id $uploadId --checksum $fileTreeHash --archiveSize $archiveSize
 
 # list open multipart connections
 echo "------------------------------"
