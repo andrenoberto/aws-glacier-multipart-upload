@@ -54,7 +54,11 @@ Before jumping into the script, verify that your connection works by describing 
 
 Download the glacierupload.sh script:
 
-    wget https://raw.githubusercontent.com/benporter/aws-glacier-multipart-upload/master/glacierupload.sh
+    wget https://raw.githubusercontent.com/andrenoberto/aws-glacier-multipart-upload/master/glacierupload.sh
+
+Download the treehash script:
+
+    wget https://raw.githubusercontent.com/andrenoberto/glaciertools/master/treehash
 
 Make it executable:
 
@@ -68,10 +72,10 @@ Tar and zip the files you want to upload:
 
 Now chunk out your zipped file into equal peice chunks.  You can only pick multiples of 1MB up to 4MB.  This example chunks out the <i>my-backup.tar.gz</i> file into 4MB chunks, giving all of them the prefix <i>part</i> which is what the script expects to see.  If you choose something other than <i>part</i>, then you'll need to edit the script.
 
-    split --bytes=4194304 --verbose my-backup.tar.gz part
+    split --bytes=67108864 --verbose my-backup.tar.gz part
 
 Now it is time to run the script.  It assumes that your <i>part*</i> files are in the same directory as the script.
 
-    ./glacierupload.sh <byteSyze> <vaultName> <accountId> <archiveDescription> <filePrefix>
+    ./glacierupload.sh <byteSyze> <vaultName> <accountId> <archiveDescription> <filePrefix> <originalFile>
 
 
